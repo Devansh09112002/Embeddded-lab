@@ -1,0 +1,40 @@
+Algorithm
+
+1. Start the program by loading HL register pair with address of memory location.
+2. Move the data to a B register.
+3. Get the second data and load into Accumulator.
+4. Compare the two numbers to check for carry.
+5. Subtract the two numbers.
+6. Increment the value of carry .
+7. Check whether repeated subtraction is over and store the value of product and carry in memory location.
+8. Terminate the program
+
+Program
+
+LXI H, 5000
+
+MOV B, M ;Get the dividend in B - reg.
+
+MVI C, 00 ;Clear C - reg for quotient
+
+INX H ;Increment HL pair of registers
+
+MOV A, M ;Get the divisor in A - reg
+
+NEXT: CMP B ;Compare A - reg with register B.
+
+JC LOOP ;Jump on carry to LOOP
+
+SUB B ;Subtract A - reg from B - reg.
+
+INR C ;Increment content of register C.
+
+JMP NEXT ;Jump to NEXT
+
+LOOP: STA 5002 ;Store the remainder in Memory
+
+MOV A, C ;Move Content of C - Reg to A - Reg
+
+STA 5003 ;Store the quotient in memory
+
+HLT ;Terminate the program
