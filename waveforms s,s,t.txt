@@ -1,0 +1,221 @@
+--- staircase----
+
+MVI A,80
+
+OUT 03
+
+START:
+
+MVIA,FF
+
+OUT 00
+
+LXI D,0020
+
+CALL DELAY
+
+MVI B,00
+
+REP:
+
+SBI 19
+
+OUT 00
+
+INR B
+
+CPI OA
+
+JZ END
+
+PUSH PSW
+
+PUSH B
+
+LXI D,0020
+
+CALL DELAY
+
+POP B
+
+POP PSW
+
+JMP REP
+
+END:
+
+MVI A,00
+
+OUT 00
+
+LXI D,0020
+
+CALL DELAY
+
+JMP START
+
+------ square waveform-----
+
+MVI A,80
+
+OUT 03
+
+START:
+
+MVI A,00
+
+OUT 00
+
+LXI D,0020
+
+CALL DELAY
+
+MVIA,FF
+
+OUT 00
+
+LXI D,0020
+
+CALL DELAY
+
+JMP START
+
+---- triangular waveform---
+
+MVI A,80
+
+OUT 03
+
+MVIA,FF
+
+START:
+
+OUT 00
+
+LXI D,0020
+
+CALL DELAY
+
+MVI B,00 SBI 19
+
+REP:
+
+OUT 00
+
+INR B
+
+CPI OA
+
+JZ REP2
+
+PUSH PSW
+
+PUSH B
+
+LXI D,0020 CALL DELAY
+
+POP B
+
+POP PSW
+
+JMP REP
+
+END
+
+MVI A,00 OUT 00
+
+LXI D,0020
+
+CALL DELAY
+
+ADI 01
+
+REP2:
+
+OUT 00
+
+INR B CPI FF
+
+JZ REP
+
+PUSH PSW
+
+PUSH B
+
+LXI D,0020
+
+CALL DELAY
+
+POP B
+
+POP PSW
+
+JMP REP2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
